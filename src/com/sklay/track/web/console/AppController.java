@@ -1,12 +1,11 @@
 package com.sklay.track.web.console;
 
-import com.google.common.collect.Maps;
-import com.sklay.track.Constants;
-import com.sklay.track.model.Action;
-import com.sklay.track.model.App;
-import com.sklay.track.model.ErrorLog;
-import com.sklay.track.model.Event;
-import com.sklay.track.service.AppService;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.common.collect.Maps;
+import com.sklay.track.Constants;
+import com.sklay.track.model.App;
+import com.sklay.track.model.Event;
+import com.sklay.track.service.AppService;
 
 /**
  * .

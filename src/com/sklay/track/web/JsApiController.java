@@ -19,61 +19,78 @@ import java.util.concurrent.Callable;
 /**
  * .
  * <p/>
- *
+ * 
  * @author <a href="mailto:oxsean@gmail.com">sean yang</a>
  * @version V1.0, 13-3-29
  */
 @Controller
-public class JsApiController {
+public class JsApiController
+{
     private static final Logger LOG = LoggerFactory.getLogger(JsApiController.class);
-
+    
     @Autowired
     private TrackService trackService;
-
+    
     @RequestMapping(value = "/boot/{id}")
     @ResponseBody
-    public Callable boot(
-            @PathVariable("id") String id,
-            HttpServletRequest request, HttpServletResponse response) {
+    public Callable boot(@PathVariable("id")
+    String id, HttpServletRequest request, HttpServletResponse response)
+    {
         return boot("v1", id, request, response);
     }
-
+    
     @RequestMapping(value = "/boot/{v}/{id}")
     @ResponseBody
-    public Callable boot(
-            @PathVariable("v") final String version,
-            @PathVariable("id") final String id,
-            final HttpServletRequest request, final HttpServletResponse response) {
-        return new Callable() {
+    public Callable boot(@PathVariable("v")
+    final String version, @PathVariable("id")
+    final String id, final HttpServletRequest request, final HttpServletResponse response)
+    {
+        return new Callable()
+        {
             @Override
-            public String call() throws Exception {
-                try {
+            public String call()
+                throws Exception
+            {
+                try
+                {
                     trackService.boot(id, version, request, response);
-                } catch (Throwable e) {
+                }
+                catch (Throwable e)
+                {
                     LOG.error("Render track js error", e);
                 }
                 return null;
             }
         };
     }
-
+    
     @RequestMapping(value = "/track/{id}")
     @ResponseBody
-    public Callable track(
-            @PathVariable("id") final String id,
-            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
+    public Callable track(@PathVariable("id")
+    final String id, final HttpServletRequest request, final HttpServletResponse response)
+        throws UnsupportedEncodingException
+    {
         request.setCharacterEncoding(Constants.DEFAULT_CHARSET);
-        return new Callable() {
+        return new Callable()
+        {
             @Override
-            public String call() throws Exception {
-                try {
+            public String call()
+                throws Exception
+            {
+                try
+                {
                     trackService.collect(id, request, response);
-                } catch (Throwable e) {
+                }
+                catch (Throwable e)
+                {
                     LOG.error("collect track data error", e);
                 }
-                if ("POST".equals(request.getMethod())) {
+                if ("POST".equals(request.getMethod()))
+                {
                     response.getWriter().write("<html></html>");
-                } else {
+                }
+                else
+                {
                     trackService.outputEmptyGif(response);
                 }
                 return null;
